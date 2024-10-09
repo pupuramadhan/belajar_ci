@@ -25,6 +25,9 @@
                         <a class="nav-link active" aria-current="page" href=<?= base_url('/') ?>>Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="<?= base_url('/profile') ?>">Profile</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<?= base_url('/data') ?>">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">

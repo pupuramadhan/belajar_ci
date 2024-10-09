@@ -9,11 +9,13 @@ use CodeIgniter\Controller;
 class LoginController extends Controller
 {
     protected $userModel;
+    protected $session;
 
     public function __construct()
     {
         helper(['form']);
         $this->userModel = new ModelPengguna();
+        $this->session = \Config\Services::session();
     }
 
     // Menampilkan form login
@@ -26,7 +28,6 @@ class LoginController extends Controller
     public function authenticate()
     {
         $validation = \Config\Services::validation();
-
         // Validasi input form
         $validation->setRules([
             'email'    => 'required|valid_email',
@@ -39,36 +40,37 @@ class LoginController extends Controller
             ]);
         }
 
+        $session = session();
         // Ambil data input dari form
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
         // Cek pengguna berdasarkan email
         $user = $this->userModel->where('email', $email)->first();
-
+        
         // Jika pengguna ditemukan
         if ($user) {
             // Verifikasi password
             if (password_verify($password, $user['password'])) {
-                // Password cocok, buat sesi login
-                session()->set([
-                    'logged_in' => true,
-                    'user_id'   => $user['id_pelanggan'],
-                    'user_name' => $user['nama_pelanggan'],
+                // Jika password benar, simpan data pengguna di session
+                $this->session->set('isLoggedIn', true);
+                $this->session->set('userData', [
+                    'id' => $user['id_pelanggan'],
+                    'nama' => $user['nama_pelanggan'],
+                    'jenis_kelamin' => $user['jenis_kelamin'],
+                    'email' => $user['email'],
+                    'tanggal_lahir' => $user['tanggal_lahir'],
+                    'alamat' => $user['alamat'],
                 ]);
-
-                // Redirect ke halaman beranda atau dashboard
-                return redirect()->to('/data');
+    
+                return redirect()->to('/profile'); // Arahkan ke ProfileController
             } else {
-                // Password salah
-                return view('login', ['error' => 'Password salah!']);
+                return redirect()->back()->with('error', 'Password salah');
             }
         } else {
-            // Pengguna tidak ditemukan
-            return view('login', ['error' => 'Email tidak terdaftar!']);
+            return redirect()->back()->with('error', 'Email tidak ditemukan');
         }
     }
-
 
     public function logout()
     {
