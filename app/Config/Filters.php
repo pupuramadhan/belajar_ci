@@ -12,6 +12,7 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\AuthFilter;
 
 class Filters extends BaseFilters
 {
@@ -25,6 +26,7 @@ class Filters extends BaseFilters
      * or [filter_name => [classname1, classname2, ...]]
      */
     public array $aliases = [
+        'auth'          => AuthFilter::class,  // Menambahkan filter auth di sini
         'csrf'          => CSRF::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
@@ -77,6 +79,14 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'secureheaders',
         ],
+        'before' => [
+            // Filter 'auth' diterapkan ke semua halaman kecuali login dan registrasi
+            'auth' => ['except' => ['login', 'register', 'auth/*']],
+        ],
+        // Filter setelah request
+        'after' => [
+            // filter lainnya
+        ]
     ];
 
     /**
@@ -104,4 +114,5 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [];
+
 }
