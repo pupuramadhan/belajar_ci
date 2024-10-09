@@ -14,3 +14,7 @@ $routes->get('login', 'LoginController::index');
 $routes->post('login', 'LoginController::authenticate');
 $routes->get('logout', 'LoginController::logout');
 $routes->get('/profile', 'ProfileController::index');
+$routes->get('pendaftaran', 'PendaftaranController::index');
+$routes->post('pendaftaran/store', 'PendaftaranController::store');
+$routes->post('pendaftaran/search', 'PendaftaranController::search');
+$routes->get('data', 'DataController::index');
