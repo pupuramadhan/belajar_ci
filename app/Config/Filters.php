@@ -81,7 +81,7 @@ class Filters extends BaseFilters
         ],
         'before' => [
             // Filter 'auth' diterapkan ke semua halaman kecuali login dan registrasi
-            'auth' => ['except' => ['login', 'register', 'auth/*']],
+            'auth' => ['except' => ['login', 'register', 'home']],
         ],
         // Filter setelah request
         'after' => [

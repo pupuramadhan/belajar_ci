@@ -19,12 +19,12 @@ class DataController extends Controller
     // Menampilkan seluruh data pendaftar
     public function index()
     {
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login');
-        }
         // Ambil semua data dari tbl_pendaftaran
         $pendaftars = $this->pendaftaranModel->findAll();
 
+        if (!session()->get('IsLoggedIn')) {
+            return view('data', ['pendaftars' => $pendaftars]);
+        }
         // Kirim data ke view
         return view('data', ['pendaftars' => $pendaftars]);
     }
