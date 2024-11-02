@@ -15,15 +15,15 @@ class ProfileController extends Controller
 
     // Menampilkan seluruh data pendaftar
     public function index()
-{
-    // Cek apakah pengguna sudah login
-    if (!$this->session->get('isLoggedIn')) {
-        return redirect()->to('/login'); // Jika belum login, redirect ke halaman login
+    {
+        // Cek apakah pengguna sudah login
+        if (!$this->session->get('isLoggedIn')) {
+            return redirect()->to('/login'); // Jika belum login, redirect ke halaman login
+        }
+
+        // Ambil data pengguna dari session
+        $userData = $this->session->get('userData');
+
+        return view('profile', ['user' => $userData]);
     }
-
-    // Ambil data pengguna dari session
-    $userData = $this->session->get('userData');
-
-    return view('profile', ['user' => $userData]);
 }
-    }

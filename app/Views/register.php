@@ -13,7 +13,7 @@
     <!--navbar-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href=<?= base_url('/') ?>>UNDIRA</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -76,8 +76,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="no_telp" class="form-label">Nomor Telepon</label>
-                    <input type="text" class="form-control" id="no_telp" name="no_telp"
+                    <label for="kontak" class="form-label">Nomor Telepon</label>
+                    <input type="text" class="form-control" id="kontak" name="kontak"
                         placeholder="Masukkan nomor telepon" required>
                     <div class="invalid-feedback">
                         Nomor telepon wajib diisi.
@@ -114,13 +114,43 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="username" class="form-label">username</label>
+                    <input type="username" class="form-control" id="username" name="username" placeholder="Masukkan username"
+                        required>
+                    <div class="invalid-feedback">
+                        username wajib diisi dengan format yang benar.
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="foto_profil" class="form-label">Foto Profil</label>
+                    <input type="foto_profil" class="form-control" id="foto_profil" name="foto_profil" placeholder="Masukkan foto_profil"
+                        required>
+                    <div class="invalid-feedback">
+                        Foto wajib diisi dengan format yang benar.
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" id="status" name="status" required>
+                        <option value="" disabled selected>Pilih Status</option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Tidak Aktif">Tidak Aktif</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Status wajib dipilih.
+                    </div>
+                </div>
+            </div>
+
             <!-- Jenis Kelamin -->
             <div class="mb-3">
                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                 <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
                     <option value="" disabled selected>Pilih jenis kelamin</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
                 </select>
                 <div class="invalid-feedback">
                     Jenis kelamin wajib dipilih.

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ModelPengguna;
+use App\Models\ModelUser;
 use CodeIgniter\Controller;
 // use App\Models\UserModel;
 
@@ -14,7 +14,7 @@ class LoginController extends Controller
     public function __construct()
     {
         helper(['form']);
-        $this->userModel = new ModelPengguna();
+        $this->userModel = new ModelUser();
         $this->session = \Config\Services::session();
     }
 
@@ -47,7 +47,7 @@ class LoginController extends Controller
 
         // Cek pengguna berdasarkan email
         $user = $this->userModel->where('email', $email)->first();
-        
+
         // Jika pengguna ditemukan
         if ($user) {
             // Verifikasi password
@@ -55,14 +55,14 @@ class LoginController extends Controller
                 // Jika password benar, simpan data pengguna di session
                 $this->session->set('isLoggedIn', true);
                 $this->session->set('userData', [
-                    'id' => $user['id_pelanggan'],
+                    'id' => $user['user_id'],
                     'nama' => $user['nama_pelanggan'],
                     'jenis_kelamin' => $user['jenis_kelamin'],
                     'email' => $user['email'],
                     'tanggal_lahir' => $user['tanggal_lahir'],
                     'alamat' => $user['alamat'],
                 ]);
-    
+
                 return redirect()->to('/profile'); // Arahkan ke ProfileController
             } else {
                 return redirect()->back()->with('error', 'Password salah');
@@ -74,7 +74,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-    session()->destroy();
-    return redirect()->to('/login');
+        session()->destroy();
+        return redirect()->to('/login');
     }
 }
